@@ -1,5 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django import forms
+
+from news.models import CommentsModel
 
 
 class NewUserForm(UserCreationForm):
@@ -15,3 +18,26 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class CommentsForm(forms.ModelForm):
+
+    class Meta:
+        model = CommentsModel
+        fields = ('comment',)
+        widgets = {
+            'comment': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter your comment here',
+                    'rows': 4,  # Set the number of visible text lines
+                    'cols': 50,  # Set the visible width of the text area
+                    'style': 'resize: vertical;',  # Allow vertical resizing of the text area
+                    'autofocus': True,  # Automatically focus on the comment field when the page loads
+                    'autocomplete': 'on',  # Enable browser autocomplete for the comment field
+                    'spellcheck': True,  # Enable spell checking for the comment field
+                }
+            ),
+        }
+
+

@@ -14,18 +14,41 @@
 </head>
 <body class="bg-primary p-5">
 <div class="navbar  navbar-fixed-top navbar-light bg-light p-2">
-  <a  class="btn btn-info" href="{% url 'homepage' %}">  news portal</a>
-</div>
-<div class="container">
-    {% block content %}
-
-    {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    {% block extra_scripts %}
+    <a class="btn btn-info" href="{% url 'homepage' %}"> news portal</a>
+    {% if request.user.is_authenticated %}
+        <span>{{ request.user.username }}&nbsp; <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-info">Logout</button>
+</form></span>
+    {% else %}
+        <div>
+            <a class="btn btn-success me-2" href="{% url 'login' %}" role="button">Login</a>
+            <a class="btn btn-success" href="{% url 'register' %}" role="button">Register</a>
         </div>
+    {% endif %}
+</div>
+<div class="container d-flex">
+    <div class="col-9 ">
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
+    <div class="col-3 p-5">
+        {% for banner in banners %}
+            <div class="bg-light mb-5">
+                <a href="{{ banner.url }}" class="btn btn-outline-success" target="_blank">
+                    <img width="100%" src="{{ banner.image.url }}">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+{% block extra_scripts %}
+
+{% endblock %}
 </body>
 <footer>
     news portal by erfan naderi for sama janatabad university
