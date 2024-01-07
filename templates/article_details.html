@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+     <div class="col-12 bg-light my-5">
+     <div class="col-12 d-flex">
+        <div class="col-5 p-3">
+            <p>{{ article.category.name }}</p>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.created_by.get_full_name }}</p>
+            <p class="text-secondary">{{ article.created_at}}</p>
+        </div>
+         <div class="col-7 p-3">
+             <img width="100%" src="{{ article.image.url }}">
+         </div>
+     </div>
+         <div class="col-12 p-3">
+            <p class='text-secoarticledary'>{{ article.description }}</p>
+        </div>
+        </div>
+{% endblock %}

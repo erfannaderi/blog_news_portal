@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container bg-light py-5 my-3 visible-md-block">
+        <h1>Register</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form}}
+            <button type="submit" class="btn btn-info">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}
