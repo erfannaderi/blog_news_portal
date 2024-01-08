@@ -19,9 +19,11 @@ class News(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField(default=None, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    created_by = models.ForeignKey(User, on_delete=models.PROTECT)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField()
+    image = models.ImageField(blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
+    source = models.CharField(max_length=30, blank=True, null=True)
     likes = models.ManyToManyField(get_user_model(), related_name='news_likes')
 
     class Meta:
@@ -29,7 +31,7 @@ class News(models.Model):
         verbose_name_plural = 'news'
 
     def __str__(self):
-        return f"{self.title} created by {self.created_by}"
+        return f"{self.title}"
 
     def number_of_likes(self):
         return self.likes.count
@@ -39,7 +41,7 @@ class CommentsModel(models.Model):
     article = models.ForeignKey(News, on_delete=models.PROTECT)
     posted_by = models.ForeignKey(User, on_delete=models.PROTECT)
     comment = models.TextField()
-    post_date = models.DateTimeField(blank=True, null=True,auto_now_add=True)
+    post_date = models.DateTimeField(blank=True, null=True, auto_now_add=True)
 
     class Meta:
         verbose_name = 'comment'

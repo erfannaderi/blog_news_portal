@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
+    'django_celery_results',
     'news',
 ]
 
@@ -127,3 +129,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 NEWSAPI_API_KEY = 'ea6e947980ae4de49abe7eb5255699f3'
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# broker_url = 'redis://localhost:6379/0'
+# result_backend = 'redis://localhost:6379/0'
