@@ -1,0 +1,39 @@
+It seems that there are several issues related to Docker and the Docker daemon on your system. Here are some steps to address these issues:
+
+1. **Docker Installation**: It appears that Docker may not be installed correctly on your system. You can use the following command to install Docker:
+
+   ```bash
+   sudo apt install docker.io
+   ```
+
+   This command will install Docker on your system. After the installation is complete, you can proceed with using Docker commands.
+
+2. **Docker Permissions**: After installing Docker, you may need to add your user to the "docker" group to run Docker commands without using `sudo`. Use the following command to add your user to the "docker" group:
+
+   ```bash
+   sudo usermod -aG docker erfan
+   ```
+
+   Replace "erfan" with your actual username. After adding your user to the "docker" group, you may need to log out and log back in for the changes to take effect.
+
+3. **Docker Daemon**: Once Docker is installed and your user is added to the "docker" group, you should be able to run Docker commands without encountering permission denied errors.
+
+4. **Docker Build and Run**: After resolving the permission issues, you can try running the Docker build and run commands for your Django project again:
+
+   ```bash
+   sudo docker build -t news_portal_blog:latest .
+   docker run -p 8000:8000 news_portal_blog:latest
+   ```
+
+   These commands will build the Docker image for your Django project and run a container based on that image.
+
+5. **Docker Service**: If you encounter issues with the Docker service, you can check its status and start it using the following commands:
+
+   ```bash
+   sudo systemctl status docker
+   sudo systemctl start docker
+   ```
+
+   These commands will check the status of the Docker service and start it if it's not already running.
+
+After following these steps, you should be able to build and run your Django project using Docker. If you encounter any specific errors or issues, please let me know so that I can provide further assistance.
